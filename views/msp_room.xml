@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="msp_room_view_tree" model="ir.ui.view">
+            <field name="name">msp.room.tree</field>
+            <field name="model">msp.room</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <tree string="Room">
+                    <field name="name" />
+                    <field name="room_id" />
+                    <field name="capacity" />
+                </tree>
+            </field>
+        </record>
+        <record id="msp_room_view_form" model="ir.ui.view">
+            <field name="name">msp.room.form</field>
+            <field name="model">msp.room</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <form string="Room">
+                <sheet>
+                
+                   <div class="oe_title">
+							<!-- <label for="name" string="Description"/> -->
+							<h1>
+								<field name="name" placeholder="Name" />
+							</h1>
+				    </div>
+                    <group>
+                    <group>
+                        <field name="room_id" />
+                        <field name="capacity" />
+                    </group>
+                    <group>
+                    </group>
+                    </group>
+                </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_msp_room_view">
+            <field name="name">Rooms</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">msp.room</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Create Rooms.
+                </p>
+            </field>
+        </record>
+                <record model="ir.sequence" id="seq_msp_room">
+            <field name="name">Room</field>
+            <field name="code">msp.room</field>
+            <field name="prefix">R</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False" />
+        </record>
+                <menuitem id="menu_msp_room" name="Room" sequence="1"
+                  parent="configuration_id" action="act_open_msp_room_view"
+                  groups="group_msp_user,group_msp_manager"/>
+    </data>
+</odoo>

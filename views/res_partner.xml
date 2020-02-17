@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+         <record id="view_res_partner_inherit" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                <page string="Msp" groups="base.group_user">
+                    <group>
+                        <field name="is_therapist"/>
+                        <field name="is_member"/>
+                    </group>
+                </page>
+            </notebook>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_therapist_level_user,therapist.level,model_therapist_level,group_msp_user,1,1,1,1
+access_msp_therapist_user,msp.therapist,model_msp_therapist,group_msp_user,1,1,1,1
+access_msp_commission_type_user,msp.commissiontype,model_msp_commissiontype,group_msp_user,1,1,1,1
+access_msp_commission_type_session_user,msp.commissiontypesession,model_msp_commissiontypesession,group_msp_user,1,1,1,1
+access_msp_room_user,msp.room,model_msp_room,group_msp_user,1,1,1,1
+access_product_therapist_line_user,product.therapist.line,model_product_therapist_line,group_msp_user,1,1,1,1

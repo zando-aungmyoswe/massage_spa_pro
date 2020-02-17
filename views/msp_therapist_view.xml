@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="kanban_view_therapist">
+            <field name="name">Therapist Kanban</field>
+            <field name="model">msp.therapist</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name='id'/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="o_kanban_image">
+                                    <img t-att-src="kanban_image('msp.therapist', 'therapist_image', record.id.value)"/>
+                                </div>
+                                <div class="oe_kanban_details">
+                                    <strong>
+                                        <ul>
+                                            <li>Name :<field name="therapist"/></li>
+                                            <li>Patient ID :<field name="name"/></li>
+                                        </ul>
+                                    </strong>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_msp_therapist_tree" model="ir.ui.view">
+            <field name="name">msp.therapist.tree</field>
+            <field name="model">msp.therapist</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <tree string="Therapist">
+                    <field name="therapist" />
+                    <field name="name" />
+                    <field name="phone"/>
+                    <field name="email"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_msp_therapist_form" model="ir.ui.view">
+            <field name="name">msp.therapist.form</field>
+            <field name="model">msp.therapist</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <form string="Therapist">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                        </div>
+                        <field name="therapist_image" widget="image" class="oe_avatar"/>
+                        <div name="title_name" class="oe_title">
+                            <h1>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <field name="therapist"
+                                                required="1"
+                                                placeholder="FullName"
+                                                style="padding-right:10px"
+                                                domain="[('is_therapist','=',True)]" context="{'search_default_is_therapist':1, 'default_is_therapist':1, 'default_customer':1}"
+                                            />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="name" />
+                                <field name="level"/>
+                                <field name="gender" />
+                                <field name="dob" />
+                                <field name="age"/>
+                            </group>
+                            <group>
+                                <field name="visa_info"/>
+                                <field name="id_proof_number"/>
+                                <field name="date" invisible="1"/>
+                                <field name="phone"/>
+                                <field name="email"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Note">
+                                <group>
+                                    <field name="note"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_msp_therapist_search" model="ir.ui.view">
+            <field name="name">msp.therapist.search</field>
+            <field name="model">msp.therapist</field>
+            <field name="priority" eval="8" />
+            <field name="arch" type="xml">
+                <search string="Therapist">
+                    <field name="therapist" />
+                    <field name="level" />
+                    <field name="name" />
+                    <newline />
+                    <group expand="0" string="Group By...">
+                        <filter name="level" string="Level"
+                            domain="[]" context="{'group_by':'level'}" />
+                        <filter name="name" string="Therapist ID"
+                            domain="[]" context="{'group_by':'name'}" />
+                        <filter name="therapist" string="Therapist"
+                            domain="[]" context="{'group_by':'therapist'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_msp_therapist_view">
+            <field name="name">Therapists</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">msp.therapist</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="search_view_id" ref="view_msp_therapist_search" />
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Create Patients.
+                </p>
+            </field>
+        </record>
+
+        <record model="ir.sequence" id="seq_msp_therapist">
+            <field name="name">Therapist</field>
+            <field name="code">msp.therapist</field>
+            <field name="prefix">T</field>
+            <field name="padding">3</field>
+            <field name="company_id" eval="False" />
+        </record>
+
+        <menuitem id="menu_msp_therapist" name="Therapist" sequence="10"
+            parent="menu_root_msp" groups="group_msp_user,group_msp_manager"/>
+        <menuitem id="menu_msp_therapist_child" name="Therapist" sequence="10"
+                  parent="menu_msp_therapist" action="act_open_msp_therapist_view"
+                  groups="group_msp_user,group_msp_manager"/>
+
+
+    </data>
+</odoo>
